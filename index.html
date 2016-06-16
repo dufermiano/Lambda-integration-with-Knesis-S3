@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app lang="en">
+<head>
+  <title>AWS Airlines</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="images/AWS.ico">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <img src="images/cloud1.png" class="img-rounded img-responsive" alt="Responsive image">
+    </div>
+
+  </div>
+</nav>
+<div class="container-fluid">
+
+  <form action="" method="post">
+
+    <div class="row">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-6">
+        <br><br><br><br><br>
+        <h1 align="center">AWS AirLines</h1>
+        <br><br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" align="center">Opção</div>
+          <form class="form-horizontal" id="myform">
+            <div class="form-group painel">
+
+          <h5><label class="control-label"> Nome do passageiro </label>
+          <input type="text" class="form-control" id="nomepassageiro"></h5>
+
+        <h5>  <label class="control-label">   Aeroporto de Origem</label>
+            <select class="form-control" id="origem">
+              <option value='CLE'>CLE</option>
+              <option>MCO</option>
+              <option>MDW</option>
+              <option>MIA</option>
+              <option>MKE</option>
+            </select></h5>
+
+        <h5>  <label class="control-label">   Aeroporto de Destino  </label>
+            <select class="form-control" id="destino">
+              <option value='CLE'>CLE</option>
+              <option>MCO</option>
+              <option>MDW</option>
+              <option>MIA</option>
+              <option>MKE</option>
+            </select></h5>
+
+            <div style="padding-top:20px;">
+              <h5>
+                <label class="radio-inline espaco-esquerda">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Dinheiro"> Dinheiro
+                </label>
+
+                <label class="radio-inline espaco-direita">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Milhas"> Milhas
+                </label>
+              </h5>
+            </div>
+
+          </div>
+
+        <div class ="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4" style="margin-bottom: 40px;" >
+            <br>
+            <button class="btn btn-lg btn-warning btn-block" style="color:black" type="submit">Enviar</button>
+          </div>
+          <div class="col-md-3">
+          </div>
+
+        </div>
+        </form>
+      </div>
+      <div class="col-md-3">
+        <footer>
+          <p><img src="images/PoweredBy.png" class="img-rounded fix" ></p>
+        </footer>
+
+      </div>
+    </div>
+  </form>
+
+</div>
+</body>
+<script src="jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function() {
+
+  // process the form
+  $('form').on('submit', function(event) {
+    // stop the form from submitting and refreshing
+    event.preventDefault();
+    // get the form data
+    var nome = $('#nomepassageiro').val();
+    var origem = $('#origem option:selected').val();
+    var destino = $('#destino option:selected').val();
+
+    if($('input[type="radio"]:checked').val() == 'Milhas'){
+      var arr = [1,2,3,4,5,6,7,8,9,10];
+      milhas = arr[Math.floor(Math.random()*arr.length)];
+    }
+
+    else{
+        milhas = 0;
+        }
+
+    var formData = '{"Nome":"' + nome + '","Origem":"' + origem + '","Destino":"' + destino + '", "Milhas":"'+ milhas +'"}';
+
+    //process the form
+
+    $.ajax({
+      type        : 'POST',
+      url         : 'https://gobru0zoxe.execute-api.us-east-1.amazonaws.com/prod/generateJSON',
+      data        : formData,
+      dataType    : 'text',
+      success     : function(test) {
+        console.log(test);
+      }
+    });
+
+    $('#nomepassageiro').val('');
+    $('#origem').val('CLE');
+    $('#destino').val('CLE');
+    $('input[type="radio"]:checked').removeAttr('checked');
+
+  });
+
+});
+</script>
+</html>

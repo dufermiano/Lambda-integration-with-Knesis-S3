@@ -1,0 +1,35 @@
+ .fix{
+    position:fixed;
+    bottom: 15px;
+    right: 10%;
+    }
+
+ .fixcenter{
+ 	position:fixed;
+    bottom: 40px;
+    right: 46%;
+ 	}
+
+.painel{
+margin-right: 100px;
+margin-left: 100px;
+margin-top: 50px;
+margin-bottom: 60px;
+}
+
+.espaco-direita{
+
+float: right;
+padding-right: 80px;
+
+}
+
+.espaco-esquerda{
+float: left;
+padding-left: 80px;
+
+}
+
+.imagemfundo{
+	padding-left: 70px;
+}
